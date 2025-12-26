@@ -14,8 +14,16 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
+    
+    // Inicializa o Pixel
     fbq('init', '1497918614592795');
+    // Rastreia a visualização da página assim que carrega
     fbq('track', 'PageView');
+
+    // Função disparada apenas no clique do botão de compra
+    function trackCheckout() {
+        fbq('track', 'InitiateCheckout');
+    }
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1497918614592795&ev=PageView&noscript=1"
@@ -26,7 +34,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- VARIÁVEIS E RESET --- */
+        /* --- ESTILOS --- */
         :root {
             --primary: #0f172a;
             --primary-light: #1e293b;
@@ -46,24 +54,20 @@
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .text-center { text-align: center; }
-        .highlight { color: var(--accent); }
         
         /* ANIMAÇÕES */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7); }
             70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(0, 230, 118, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
         }
-
         .fade-in { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
         .delay-1 { animation-delay: 0.2s; }
         .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
 
         /* BOTÕES */
         .btn {
@@ -80,123 +84,36 @@
             border: none;
             cursor: pointer;
             text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
         }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 230, 118, 0.6); }
         .btn-pulse { animation: pulse 2s infinite; }
         
-        /* --- HERO SECTION --- */
-        .hero {
-            background: var(--gradient);
-            color: var(--white);
-            padding: 60px 0 100px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .hero-tag {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #60a5fa;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
+        /* HERO */
+        .hero { background: var(--gradient); color: var(--white); padding: 60px 0 100px; position: relative; overflow: hidden; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .hero-tag { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #60a5fa; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 20px; }
         .hero h1 { font-size: 3rem; margin-bottom: 20px; letter-spacing: -1px; }
         .hero h1 span { color: var(--highlight); }
-        .hero p { font-size: 1.2rem; color: #cbd5e1; margin-bottom: 35px; }
-
-        .hero-image-container {
-            position: relative;
-            z-index: 2;
-        }
-        .hero-img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: transform 0.5s ease;
-        }
+        .hero-img { width: 100%; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.1); transform: perspective(1000px) rotateY(-5deg); transition: transform 0.5s ease; }
         .hero-img:hover { transform: perspective(1000px) rotateY(0deg); }
 
-        /* --- FEATURES --- */
+        /* FEATURES */
         .features { padding: 80px 0; background: var(--white); margin-top: -50px; position: relative; z-index: 10; }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        
-        .feature-card {
-            padding: 35px;
-            border-radius: 20px;
-            background: var(--white);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid #f1f5f9;
-            transition: 0.3s;
-        }
+        .feature-card { padding: 35px; border-radius: 20px; background: var(--white); box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; transition: 0.3s; }
         .feature-card:hover { transform: translateY(-10px); border-color: var(--accent); }
-        .feature-icon-box {
-            width: 60px; height: 60px;
-            background: #eff6ff;
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 20px;
-            color: var(--accent);
-            font-size: 1.5rem;
-        }
+        .feature-icon-box { width: 60px; height: 60px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--accent); font-size: 1.5rem; }
 
-        /* --- MÓDULOS --- */
+        /* MODULOS */
         .modules { padding: 80px 0; background-color: var(--bg-light); }
         .module-container { max-width: 800px; margin: 40px auto 0; }
-        
-        details {
-            background: var(--white);
-            margin-bottom: 15px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            border: 1px solid #e2e8f0;
-        }
-        summary {
-            padding: 22px;
-            font-weight: 700;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--primary);
-            transition: 0.3s;
-        }
-        summary:hover { background-color: #f8fafc; color: var(--accent); }
-        summary::after { content: '+'; font-size: 1.5rem; transition: 0.3s; }
-        details[open] summary::after { content: '-'; transform: rotate(180deg); }
+        details { background: var(--white); margin-bottom: 15px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
+        summary { padding: 22px; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--primary); }
         .details-content { padding: 0 22px 22px; color: #64748b; }
-
-        .bonus-module { border: 2px solid #eab308; position: relative; overflow: hidden; }
+        .bonus-module { border: 2px solid #eab308; position: relative; }
         .bonus-tag { position: absolute; top: 0; right: 0; background: #eab308; color: white; padding: 2px 10px; font-size: 0.7rem; font-weight: bold; border-bottom-left-radius: 10px; }
 
-        /* --- DEPOIMENTOS (NOVO) --- */
+        /* DEPOIMENTOS */
         .testimonials { padding: 80px 0; background: var(--primary); color: white; }
         .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
         .testi-card { background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
@@ -204,46 +121,22 @@
         .user-info { display: flex; align-items: center; margin-top: 20px; }
         .avatar { width: 40px; height: 40px; background: #cbd5e1; border-radius: 50%; margin-right: 10px; display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; }
 
-        /* --- PREÇO --- */
-        .pricing { padding: 80px 0; background: var(--bg-light); position: relative; }
-        .pricing-card {
-            background: var(--white);
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 50px;
-            border-radius: 25px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
-            border: 1px solid #e2e8f0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+        /* PREÇO */
+        .pricing { padding: 80px 0; background: var(--bg-light); }
+        .pricing-card { background: var(--white); max-width: 500px; margin: 0 auto; padding: 50px; border-radius: 25px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; text-align: center; position: relative; overflow: hidden; }
         .pricing-header { background: var(--bg-light); margin: -50px -50px 30px; padding: 30px; border-bottom: 1px solid #e2e8f0; }
         .old-price { font-size: 1.1rem; text-decoration: line-through; color: #94a3b8; }
         .new-price { font-size: 3.5rem; font-weight: 800; color: var(--primary); letter-spacing: -2px; }
-        
-        /* STICKY BAR MOBILE */
-        .sticky-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: var(--white);
-            padding: 15px 20px;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-            display: none;
-            z-index: 100;
-            justify-content: space-between;
-            align-items: center;
-        }
 
-        /* RESPONSIVO */
+        /* STICKY BAR */
+        .sticky-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--white); padding: 15px 20px; box-shadow: 0 -5px 20px rgba(0,0,0,0.1); display: none; z-index: 100; justify-content: space-between; align-items: center; }
+
         @media (max-width: 900px) {
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-img { margin-top: 30px; transform: none; }
             .hero h1 { font-size: 2.2rem; }
             .sticky-bar { display: flex; }
-            .hero .btn { display: none; } /* Oculta botão hero no mobile para focar no sticky */
+            .hero .btn { display: none; }
         }
     </style>
 </head>
@@ -284,7 +177,6 @@
         <div class="container">
             <h2 class="text-center">Por que este método funciona?</h2>
             <p class="text-center" style="max-width: 600px; margin: 10px auto 0; color: #64748b;">A maioria dos cursos ensina teoria velha. Nós ensinamos o que as empresas exigem hoje.</p>
-            
             <div class="features-grid">
                 <div class="feature-card fade-in">
                     <div class="feature-icon-box"><i class="fas fa-rocket"></i></div>
@@ -299,7 +191,7 @@
                 <div class="feature-card fade-in delay-2">
                     <div class="feature-icon-box"><i class="fas fa-brain"></i></div>
                     <h3>Inteligência Artificial</h3>
-                    <p>O diferencial de 2026: aprenda a usar o ChatGPT para escrever e-mails e criar fórmulas complexas por você.</p>
+                    <p>O diferencial de 2026: aprenda a usar o ChatGPT e IAs para trabalhar por você.</p>
                 </div>
             </div>
         </div>
@@ -309,7 +201,6 @@
         <div class="container">
             <h2 class="text-center">Conteúdo Programático</h2>
             <div class="module-container">
-                
                 <details open>
                     <summary>01. Windows e Produtividade</summary>
                     <div class="details-content">
@@ -320,7 +211,6 @@
                         </ul>
                     </div>
                 </details>
-
                 <details>
                     <summary>02. Word: Documentos de Elite</summary>
                     <div class="details-content">
@@ -331,7 +221,6 @@
                         </ul>
                     </div>
                 </details>
-
                 <details>
                     <summary>03. Excel Master (OEL)</summary>
                     <div class="details-content">
@@ -343,7 +232,6 @@
                         </ul>
                     </div>
                 </details>
-
                 <details class="bonus-module">
                     <span class="bonus-tag">BÔNUS EXCLUSIVO</span>
                     <summary><i class="fas fa-robot" style="margin-right:10px; color: #eab308;"></i> Módulo IA Produtiva 2026</summary>
@@ -399,24 +287,20 @@
                     <h3>Acesso Vitalício + Certificado</h3>
                     <p>Tudo o que você precisa em um único pacote.</p>
                 </div>
-                
                 <div style="margin: 20px 0;">
                     <span class="old-price">De R$ 197,00</span>
                     <div class="new-price">R$ 37,90</div>
                     <span style="background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">Oferta por tempo limitado</span>
                 </div>
-
                 <ul style="text-align: left; margin: 30px auto; max-width: 300px; color: #475569;">
                     <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #00e676; margin-right: 10px;"></i> Curso Completo Informática</li>
                     <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #00e676; margin-right: 10px;"></i> Excel Master (OEL)</li>
                     <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #00e676; margin-right: 10px;"></i> Bônus Inteligência Artificial</li>
                     <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #00e676; margin-right: 10px;"></i> Certificado Incluso</li>
                 </ul>
-                
-                <a href="https://pay.payonpag.com/GtOozdOh" class="btn btn-pulse" style="width: 100%;">
+                <a href="https://pay.payonpag.com/GtOozdOh" class="btn btn-pulse" style="width: 100%;" onclick="trackCheckout()">
                     QUERO ME INSCREVER AGORA
                 </a>
-
                 <div style="margin-top: 25px; font-size: 0.8rem; color: #94a3b8;">
                     <i class="fas fa-lock"></i> Pagamento processado com segurança bancária.
                 </div>
@@ -459,7 +343,7 @@
             <span style="font-size: 0.8rem; color: #64748b;">Apenas hoje:</span><br>
             <strong style="color: var(--primary); font-size: 1.2rem;">R$ 37,90</strong>
         </div>
-        <a href="https://pay.payonpag.com/GtOozdOh" class="btn" style="padding: 12px 25px; font-size: 0.9rem;">
+        <a href="https://pay.payonpag.com/GtOozdOh" class="btn" style="padding: 12px 25px; font-size: 0.9rem;" onclick="trackCheckout()">
             COMPRAR
         </a>
     </div>

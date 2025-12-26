@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de Informática Completo + IA | Profissão Digital</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIÁVEIS E RESET --- */
+        :root {
+            --primary: #0f172a; /* Azul Escuro Profundo */
+            --accent: #2563eb; /* Azul Vibrante */
+            --highlight: #00e676; /* Verde Venda */
+            --text-dark: #334155;
+            --text-light: #94a3b8;
+            --white: #ffffff;
+            --bg-light: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Open Sans', sans-serif; color: var(--text-dark); background-color: var(--bg-light); line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; line-height: 1.2; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .text-center { text-align: center; }
+        .highlight { color: var(--accent); }
+        
+        /* BOTÕES */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #00c853 0%, #00e676 100%);
+            color: #004d20;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0, 230, 118, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 230, 118, 0.5); }
+        .btn i { margin-right: 10px; }
+
+        /* --- HERO SECTION (TOPO) --- */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            color: var(--white);
+            padding: 120px 0 100px; /* Aumentei um pouco o padding inferior */
+            position: relative;
+            overflow: hidden;
+            text-align: center; /* Centraliza todo o conteúdo do Hero */
+        }
+        
+        /* Removido o grid para centralizar o texto */
+        .hero-content {
+            max-width: 800px; /* Limita a largura para não ficar muito espalhado */
+            margin: 0 auto;
+        }
+        
+        .hero-tag {
+            background-color: rgba(37, 99, 235, 0.2);
+            color: #60a5fa;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 25px;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+        }
+
+        .hero h1 { font-size: 3.5rem; margin-bottom: 25px; } /* Aumentei a fonte do título */
+        .hero h1 span { color: var(--highlight); }
+        .hero p { font-size: 1.3rem; color: #cbd5e1; margin-bottom: 40px; }
+
+        /* --- FEATURES (BENEFÍCIOS) --- */
+        .features { padding: 80px 0; background: var(--white); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        
+        .feature-card {
+            padding: 30px;
+            border-radius: 15px;
+            background: var(--bg-light);
+            transition: 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+        .feature-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        /* --- MÓDULOS (ACORDEÃO) --- */
+        .modules { padding: 80px 0; background-color: var(--bg-light); }
+        .module-container { max-width: 800px; margin: 40px auto 0; }
+        
+        details {
+            background: var(--white);
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+        }
+        summary {
+            padding: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primary);
+            transition: 0.3s;
+        }
+        summary:hover { background-color: #f1f5f9; }
+        summary::after { content: '\f078'; font-family: "Font Awesome 6 Free"; font-weight: 900; transition: 0.3s; }
+        details[open] summary::after { transform: rotate(180deg); }
+        .details-content { padding: 20px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.95rem; }
+        .details-content ul li { margin-bottom: 8px; list-style: none; }
+        .details-content ul li i { color: var(--highlight); margin-right: 10px; }
+
+        .bonus-module { border: 2px solid #eab308; }
+        .bonus-module summary { color: #b45309; background: #fefce8; }
+
+        /* --- PREÇO E CTA --- */
+        .pricing {
+            padding: 80px 0;
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+        }
+        .pricing-card {
+            background: var(--white);
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .old-price { font-size: 1.2rem; text-decoration: line-through; color: #94a3b8; }
+        .new-price { font-size: 4rem; font-weight: 800; color: var(--primary); line-height: 1; margin: 10px 0; }
+        .new-price small { font-size: 1.2rem; font-weight: 600; }
+        
+        /* --- FAQ --- */
+        .faq { padding: 80px 0; background: var(--white); }
+        
+        /* --- RODAPÉ --- */
+        footer { background: #0f172a; color: #64748b; padding: 40px 0; border-top: 1px solid #1e293b; font-size: 0.9rem; }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .pricing-card { padding: 30px; }
+            .new-price { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="hero-tag"><i class="fas fa-check-circle"></i> Atualizado para 2026</span>
+                <h1>Domine o Computador e a IA para garantir seu <br><span>Lugar no Mercado</span></h1>
+                <p>O único treinamento que une Informática Essencial, Excel Master e Inteligência Artificial. Do zero ao profissional em tempo recorde.</p>
+                <a href="#pricing" class="btn"><i class="fas fa-lock"></i> Quero Minha Vaga Agora Por R$37,90 </a>
+                <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;"><i class="fas fa-star" style="color: #fbbf24;"></i> 4.9/5 baseado em alunos reais</p>
+            </div>
+            </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 10px;">Por que este é o curso definitivo?</h2>
+            <p class="text-center" style="color: #64748b;">Esqueça cursos longos e chatos. Focamos no que dá resultado.</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-rocket feature-icon"></i>
+                    <h3>Método Rápido</h3>
+                    <p>Aulas diretas ao ponto. Você aprende executando tarefas reais do dia a dia de um escritório.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-table feature-icon"></i>
+                    <h3>Excel Master (OEL)</h3>
+                    <p>Não ensinamos só o básico. Você recebe o nosso curso completo de Excel Avançado dentro do pacote.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-robot feature-icon"></i>
+                    <h3>Inteligência Artificial</h3>
+                    <p>Saia na frente da concorrência aprendendo a usar o ChatGPT e IAs para trabalhar por você.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="modules">
+        <div class="container">
+            <h2 class="text-center">O que você vai aprender</h2>
+            <div class="module-container">
+                
+                <details open>
+                    <summary>Módulo 01: Windows e Organização</summary>
+                    <div class="details-content">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Domínio da Área de Trabalho e Atalhos</li>
+                            <li><i class="fas fa-check"></i> Organização Profissional de Arquivos</li>
+                            <li><i class="fas fa-check"></i> Gerenciamento de Programas</li>
+                            <li><i class="fas fa-check"></i> Dominando PDFs (Unir, Separar, Assinar)</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Módulo 02: Word e Documentos</summary>
+                    <div class="details-content">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Formatação ABNT Simplificada</li>
+                            <li><i class="fas fa-check"></i> Criação de Contratos e Propostas</li>
+                            <li><i class="fas fa-check"></i> Currículo Campeão</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Módulo 03: Internet e Nuvem</summary>
+                    <div class="details-content">
+                        <ul>
+                            <li><i class="fas fa-check"></i> E-mail Corporativo Profissional</li>
+                            <li><i class="fas fa-check"></i> Google Drive e OneDrive</li>
+                            <li><i class="fas fa-check"></i> Segurança Digital</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Módulo 04: EXCEL MASTER (Completo)</summary>
+                    <div class="details-content">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Fórmulas Básicas e Intermediárias</li>
+                            <li><i class="fas fa-check"></i> Funções Lógicas (SE, E, OU)</li>
+                            <li><i class="fas fa-check"></i> PROCV, PROCX e Buscas</li>
+                            <li><i class="fas fa-check"></i> Tabelas Dinâmicas e Dashboards</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="bonus-module">
+                    <summary><i class="fas fa-gift" style="margin-right:10px"></i> BÔNUS: Inteligência Artificial 2026</summary>
+                    <div class="details-content">
+                        <ul>
+                            <li><i class="fas fa-check"></i> Introdução ao ChatGPT e Gemini</li>
+                            <li><i class="fas fa-check"></i> Criando Prompts para E-mails e Textos</li>
+                            <li><i class="fas fa-check"></i> Usando IA para resolver problemas de Excel</li>
+                        </ul>
+                    </div>
+                </details>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="pricing-card">
+                <h3>Oferta Especial de Lançamento</h3>
+                <p>Tenha acesso vitalício a todo o conteúdo agora.</p>
+                <div style="margin: 30px 0;">
+                    <span class="old-price">De R$ 197,00</span>
+                    <div class="new-price">R$ 37,00</div>
+                    <span style="color: #64748b">Pagamento único. Sem mensalidades.</span>
+                </div>
+                
+                <a href="SEU_LINK_DE_PAGAMENTO_AQUI" class="btn" style="width: 100%; display: block;">
+                    SIM! QUERO COMEÇAR AGORA
+                </a>
+
+                <div style="margin-top: 20px; font-size: 0.85rem; color: #64748b; display: flex; justify-content: center; gap: 20px;">
+                    <span><i class="fas fa-shield-alt"></i> Compra Segura</span>
+                    <span><i class="fas fa-bolt"></i> Acesso Imediato</span>
+                    <span><i class="fas fa-undo"></i> 7 Dias de Garantia</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 40px;">Dúvidas Frequentes</h2>
+            <div class="module-container">
+                <details>
+                    <summary>O curso tem certificado?</summary>
+                    <div class="details-content">Sim! Ao concluir todas as aulas, você recebe um certificado válido em todo território nacional para comprovar suas horas.</div>
+                </details>
+                <details>
+                    <summary>Por quanto tempo tenho acesso?</summary>
+                    <div class="details-content">O acesso é vitalício. Você pode ver e rever as aulas quantas vezes quiser, no seu ritmo.</div>
+                </details>
+                <details>
+                    <summary>Preciso ter conhecimento prévio?</summary>
+                    <div class="details-content">Nenhum. Começamos do absoluto zero, ensinando desde como ligar e organizar o computador.</div>
+                </details>
+                <details>
+                    <summary>Como recebo o acesso?</summary>
+                    <div class="details-content">Assim que o pagamento for confirmado, você recebe um e-mail automático com seu login e senha para a plataforma de aulas.</div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; 2026 Curso de Informática Completo + IA. Todos os direitos reservados.</p>
+            <p style="margin-top: 10px;">Termos de Uso | Política de Privacidade</p>
+        </div>
+    </footer>
+
+</body>
+</html>

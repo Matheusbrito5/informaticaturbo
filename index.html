@@ -67,15 +67,7 @@
             transition: transform 0.3s;
         }
         .card:hover { transform: translateY(-10px); border-color: var(--primary); }
-        
-        /* ESTILO PARA OS ÍCONES DE IMAGEM */
-        .card-img-icon {
-            width: 60px; /* Tamanho do ícone */
-            height: 60px;
-            margin-bottom: 20px;
-            display: block;
-        }
-        
+        .card-icon { font-size: 3rem; margin-bottom: 20px; display: block; }
         .card h3 { margin-bottom: 15px; color: #fff; }
         .card p { color: var(--text-gray); font-size: 0.95rem; }
 
@@ -145,32 +137,32 @@
         
         <div class="grid">
             <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg" alt="Ícone Excel" class="card-img-icon">
+                <span class="card-icon">📊</span>
                 <h3>Excel Master</h3>
                 <p>Saia do zero e crie planilhas, gráficos e dashboards que impressionam chefes e clientes. A ferramenta nº 1 das empresas.</p>
             </div>
 
             <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Microsoft_Office_Word_%282019%E2%80%93present%29.svg" alt="Ícone Word" class="card-img-icon">
+                <span class="card-icon">📝</span>
                 <h3>Word Profissional</h3>
                 <p>Aprenda a formatar contratos, TCCs e relatórios com padrão ABNT e corporativo. Nunca mais sofra com formatação.</p>
             </div>
 
             <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Microsoft_Office_PowerPoint_%282019%E2%80%93present%29.svg" alt="Ícone PowerPoint" class="card-img-icon">
+                <span class="card-icon">🎯</span>
                 <h3>PowerPoint de Elite</h3>
                 <p>Crie apresentações magnéticas. Abandone o "slide branco com texto preto" e encante sua audiência.</p>
             </div>
 
             <div class="card">
-                <img src="https://cdn-icons-png.flaticon.com/512/4150/4150583.png" alt="Ícone Nuvem" class="card-img-icon">
+                <span class="card-icon">☁️</span>
                 <h3>Redes & Nuvem</h3>
                 <p>Trabalhe de qualquer lugar. Domine Google Drive, OneDrive e segurança de dados para não perder seus arquivos.</p>
             </div>
 
             <div class="card bonus-card">
                 <span class="bonus-badge">🔥 BÔNUS EXCLUSIVO</span>
-                <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Ícone IA" class="card-img-icon">
+                <span class="card-icon">🤖</span>
                 <h3>Inteligência Artificial</h3>
                 <p>O segredo da produtividade 10x. Aprenda a usar IAs para escrever e-mails, criar fórmulas e resumir textos em segundos.</p>
             </div>
